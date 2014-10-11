@@ -11,11 +11,10 @@
   <script type="text/javascript" src='js/libs/underscore/underscore.js'></script>
   <script type="text/javascript" src='js/libs/backbone/backbone.js'></script>
   <script type="text/javascript" src='js/libs/handlebars/handlebars.js'></script>
-  <script type="text/javascript" src='js/libs/require/require.js'></script>
   <script type="text/javascript">
 
  
-
+  // Backbone Model
   var Book = Backbone.Model.extend({
 
     defaults: {
@@ -23,13 +22,14 @@
     }
   });
 
-
+  // Backbone Collection
   var Books = Backbone.Collection.extend({
 
     model: Book
 
   });
 
+  // Backbone View
   var BookListView = Backbone.View.extend({
 
     initialize: function() {
@@ -55,6 +55,7 @@
     }
   });
 
+  //Backbone View
   var Index = Backbone.View.extend({
 
     initialize: function() {
@@ -67,6 +68,7 @@
     }
   });
 
+  //Backbone Router
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Define some URL routes
