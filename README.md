@@ -6,7 +6,7 @@
  
  -------------------------------------------------------------------------------------
 
- 1. ``Simple``, you have to clone/downdload this project:
+ 1. ``Simple``, you have to clone/download this project:
 
  ``$ git clone https://github.com/jac1013/backbone-requirejs.git``
 
