@@ -15,24 +15,7 @@
   <script type="text/javascript" src='js/libs/require/require.js'></script>
   <script type="text/javascript">
 
-  var AppRouter = Backbone.Router.extend({
-    routes: {
-      // Define some URL routes
-      'books': 'showBooks',
-    },
-
-    showBooks: function(){
-      var bookListView = new BookListView();
-      bookListView.render();
-    }
-  });
-
-  var initialize = function() {
-    var app_router = new AppRouter;
-    Backbone.history.start();
-  };
-
-    initialize();
+ 
 
   var Book = Backbone.Model.extend({
 
@@ -41,6 +24,7 @@
     }
   });
 
+
   var Books = Backbone.Collection.extend({
 
     model: Book
@@ -48,7 +32,6 @@
   });
 
   var BookListView = Backbone.View.extend({
-    el: $('.container'),
 
     initialize: function() {
       this.collection = new Books();
@@ -61,23 +44,59 @@
       this.collection.add({
         title: 'JavaScript: The Good Parts'
       });
-      this.template = Handlebars.compile($('#template').html());
+      this.template = Handlebars.compile("<ul>{{#each books}}{{#with this}}<li>{{title}}</li>{{/with}}{{/each}}</ul>");
+      this.render();
     },
 
     render: function() {
-      this.$el.html(this.template({books: this.collection.toJSON()}));
+      $('.books-list-container').html(this.$el.html(this.template({
+        books: this.collection.toJSON()
+      })));
       return this;
     }
   });
 
+  var Index = Backbone.View.extend({
+
+    initialize: function() {
+      this.template = Handlebars.compile('<a href="#books">Books list</a>');
+      this.render();
+    },
+
+    render: function() {
+      $('.books-link-container').html(this.$el.html(this.template()));
+    }
+  });
+
+  var AppRouter = Backbone.Router.extend({
+    routes: {
+      // Define some URL routes
+      '': 'showIndex',
+      'books': 'showBooks'
+    },
+
+    showIndex: function() {
+      this.loadView(new Index());
+    },
+
+    showBooks: function() {
+      this.loadView(new BookListView());
+    },
+
+    loadView: function(view) {
+      this.view && this.view.remove();
+      this.view = view;
+    }
+  });
+
+  var initialize = function() {
+    var app_router = new AppRouter;
+    Backbone.history.start();
+  };
+
+  initialize();
+
   </script>
 
-  <script type="text/template" id='template'>
-  <ul>
-    {{#each books}}
-    <li>{{title}}</li>
-    {{/each}}
-  </ul>  
-  </script>
 </body>
 </html>
