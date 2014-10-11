@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Backbone + RequireJS</title>
+</head>
+<body>
+  <div class="container">
+      <a href="#books">Books list</a>
+  </div>
+  <script type="text/javascript" src='js/libs/jquery/jquery.js'></script>
+  <script type="text/javascript" src='js/libs/underscore/underscore.js'></script>
+  <script type="text/javascript" src='js/libs/backbone/backbone.js'></script>
+  <script type="text/javascript" src='js/libs/handlebars/handlebars.js'></script>
+  <script type="text/javascript" src='js/libs/require/require.js'></script>
+  <script type="text/javascript">
+
+  var AppRouter = Backbone.Router.extend({
+    routes: {
+      // Define some URL routes
+      'books': 'showBooks',
+    },
+
+    showBooks: function(){
+      var bookListView = new BookListView();
+      bookListView.render();
+    }
+  });
+
+  var initialize = function() {
+    var app_router = new AppRouter;
+    Backbone.history.start();
+  };
+
+    initialize();
+
+  var Book = Backbone.Model.extend({
+
+    defaults: {
+      title: 'Pragmatic Programmer'
+    }
+  });
+
+  var Books = Backbone.Collection.extend({
+
+    model: Book
+
+  });
+
+  var BookListView = Backbone.View.extend({
+    el: $('.container'),
+
+    initialize: function() {
+      this.collection = new Books();
+      this.collection.add({
+        title: 'Clean Code'
+      });
+      this.collection.add({
+        title: 'Pragmatic Programmer'
+      });
+      this.collection.add({
+        title: 'JavaScript: The Good Parts'
+      });
+      this.template = Handlebars.compile($('#template').html());
+    },
+
+    render: function() {
+      this.$el.html(this.template({books: this.collection.toJSON()}));
+      return this;
+    }
+  });
+
+  </script>
+
+  <script type="text/template" id='template'>
+  <ul>
+    {{#each books}}
+    <li>{{title}}</li>
+    {{/each}}
+  </ul>  
+  </script>
+</body>
+</html>
