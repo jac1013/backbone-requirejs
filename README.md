@@ -1,6 +1,6 @@
  ## BackboneJS + RequireJS
 
- Repository to show with a simple ``BackboneJS`` project with facts [Why AMD](http://requirejs.org/docs/whyamd.html)
+ Repository to show with a simple ``BackboneJS`` project with ``facts`` [Why AMD](http://requirejs.org/docs/whyamd.html)
 
  #### How to Check it
  
@@ -32,9 +32,11 @@
 
 Here are 2 screenshots from my own personal laboratory setup test:
 
-[without-require](https://db.tt/fJ99Sbtm): Approximate script LT: ~135ms
+10 samples: 89.881 - 92.916 - 83.000 - 77.036 - 89.490 - 98.496 - 77.076 - 83.589 - 94.870 - 86.746 (ms).
+[without-require](https://db.tt/tUNExjg4): Approximate script LT: ~87.310ms
 
-[with-require](https://db.tt/sR3XlzkF): Approximate script LT: ~55ms
+10 samples: 41.319 - 40.123 - 38.347 - 38.921 - 36.635 - 34.245 - 41.142 - 87.258 - 90.993 - 40.349 (ms).
+[with-require](https://db.tt/AkUEKSEY): Approximate script LT: ~48.933ms
 
 ### Thank me later.
  
