@@ -2,9 +2,9 @@ define([
   // These are path alias that we configured in our bootstrap
   'jquery',     // lib/jquery/jquery
   'underscore', // lib/underscore/underscore
-  'backbone'
+  'backbone',
   'models/books'    // lib/backbone/backbone
-], function($, _, Backbone, Handlebars){
+], function($, _, Backbone, Book){
  
   var Books = Backbone.Collection.extend({
 
